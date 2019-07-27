@@ -36,7 +36,7 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
+    // padding: theme.spacing.unit * 3,
   },
 });
 
@@ -61,9 +61,9 @@ class PermanentDrawer extends React.Component {
                     className={classNames(classes.appBar, classes[`appBar-${anchor}`])}
                 >
                     <Toolbar>
-                    <Typography variant="title" color="inherit" noWrap>
+                    {/* <Typography variant="title" color="inherit" noWrap>
                         CRUD
-                    </Typography>
+                    </Typography> */}
                     </Toolbar>
                 </AppBar>
     );

@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import HomeIcon from '@material-ui/icons/Home';
 import LogoutIcon from '@material-ui/icons/HighlightOff';
 import VendorIcon from '@material-ui/icons/CardTravel';
+import { Link } from 'react-router-dom'
 
 
 const drawerWidth = 240;
@@ -44,7 +45,7 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
+    // padding: theme.spacing.unit * 3,
   },
 });
 
@@ -78,19 +79,23 @@ class Navigation extends React.Component {
                 anchor={anchor}
             >
                 <List component="nav">
-                    <ListItem button component='a' href="/home">
+                    <Link component='a' to="/home">
+                      <ListItem>
                         <ListItemIcon>
                             <HomeIcon />
                         </ListItemIcon>
                         <ListItemText primary="Home"/>
-                    </ListItem>
+                      </ListItem>
+                    </Link>
 
-                    <ListItem button component='a' href="/vendor">
+                    <Link component='a' to="/vendor">
+                      <ListItem>
                         <ListItemIcon>
                             <VendorIcon />
                         </ListItemIcon>
                         <ListItemText primary="Vendors"/>
-                    </ListItem>
+                      </ListItem>
+                    </Link>
 
                     <ListItem button onClick={(event)=>{this.logout()}}>
                         <ListItemIcon>

@@ -50,15 +50,15 @@ const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
+    // padding: theme.spacing.unit * 3,
   },
 
   paper: {
     position: 'absolute',
-    width: theme.spacing.unit * 50,
+    // width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
+    // padding: theme.spacing.unit * 4,
   },
 });
 

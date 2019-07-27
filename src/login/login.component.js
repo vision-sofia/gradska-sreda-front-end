@@ -23,25 +23,25 @@ const styles = theme => ({
         flexWrap: 'wrap',
     },
     margin: {
-      margin: theme.spacing.unit,
+    //   margin: theme.spacing.unit,
     },
     withoutLabel: {
-      marginTop: theme.spacing.unit * 3,
+    //   marginTop: theme.spacing.unit * 3,
     },
     textField: {
-        marginLeft: theme.spacing.unit,
-        marginRight: theme.spacing.unit,
+        // marginLeft: theme.spacing.unit,
+        // marginRight: theme.spacing.unit,
         width: 200,
     },
 
     paper: {
-        padding: theme.spacing.unit * 2,
+        // padding: theme.spacing.unit * 2,
         textAlign: 'center',
         color: theme.palette.text.secondary,
     },
 
     button: {
-        margin: theme.spacing.unit,
+        // margin: theme.spacing.unit,
     },
 
     input: {
@@ -85,7 +85,7 @@ class Login extends Component {
       const { classes } = this.props;
       return (
         <div className="login-margin">
-            <Grid container spacing={24}>
+            <Grid container >
                 <Grid item xs={3}>
                 </Grid>
                 <Grid item xs={6}>
