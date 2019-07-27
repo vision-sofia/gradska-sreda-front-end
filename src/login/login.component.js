@@ -10,7 +10,7 @@ import { userActions } from '../_actions';
 import { history } from '../_helpers';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
-import './login.component.css'
+import './login.component.scss'
 
 
 const styles = theme => ({

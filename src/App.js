@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import { Router, Switch, Route} from 'react-router-dom';
 import { Vendor } from './vendors/vendor.component';
 import { AddVendor } from './vendors/addvendor.component'
