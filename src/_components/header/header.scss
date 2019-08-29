@@ -1,0 +1,44 @@
+@import 'src/assets/scss/variables';
+
+.app-header {
+  --active-area-width: 100%;
+  --active-area-height: 78px;
+  --active-area-top: 0;
+  --active-area-left: 0;
+  width: var(--active-area-width);
+  height: var(--active-area-height);
+  top: var(--active-area-top);
+  left: var(--active-area-left);
+  transition: 0.3s ease transform;
+  transform: translate3d(0, -100%, 0);
+
+  &.active {
+    transform: translate3d(0, 0, 0);
+  }
+
+  &-logo {
+    max-height: 62px;
+    object-fit: contain;
+
+    &-container {
+
+    }
+  }
+
+  nav {
+    text-transform: uppercase;
+
+    a {
+      border: 2px solid transparent;
+      padding-top: 0.7rem;
+      font-size: 1rem;
+      font-weight: 900;
+      color: #3c3950;
+
+      &.active {
+        border-color: $colorPrimary;
+        color: $colorPrimary !important;
+      }
+    }
+  }
+}

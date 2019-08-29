@@ -12,7 +12,7 @@ export const vendorAction = {
 
 function getVendor(){
     return dispatch => {
-        let apiEndpoint = 'front-end/geo-collection/info';
+        let apiEndpoint = 'geo-collection/info';
         userService.get(apiEndpoint)
         .then((response)=>{
             console.log(response);

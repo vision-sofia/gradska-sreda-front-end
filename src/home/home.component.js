@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '../_components/appbar';
 import Nav from '../_components/nav'; 
+import Header from '../_components/header/header'; 
 
 
 const drawerWidth = 240;
@@ -52,8 +53,10 @@ class Home extends Component {
 
         <div className={classes.root}>
             <div className={classes.appFrame}>
-            <AppBar/>
-            <Nav />
+            <Header />
+            <div className="mt-5 pt-5">
+              <Nav />
+            </div>
             <main className={classes.content}>
                 <div className={classes.toolbar} />
                 <Typography>{'Home'}</Typography>

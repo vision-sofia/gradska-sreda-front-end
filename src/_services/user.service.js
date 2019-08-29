@@ -45,7 +45,7 @@ function deleteDetail(apiEndpoint){
 function getOptions(){
     let options = {}; 
     if(localStorage.getItem('token')){
-        options.headers = { 'x-access-token': localStorage.getItem('token') };
+        options.headers = { 'Authorization': 'Bearer ' + localStorage.getItem('token') };
     }
     return options;
 }
