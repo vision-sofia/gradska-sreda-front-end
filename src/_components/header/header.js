@@ -1,31 +1,22 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import { userActions } from '../../_actions';
 import { connect } from 'react-redux';
 import HomeIcon from '@material-ui/icons/Home';
 import LogoutIcon from '@material-ui/icons/HighlightOff';
 import VpnKeyIcon from '@material-ui/icons/ArrowRightAlt';
-import { Link } from 'react-router-dom';
 import ImgLogo from '../../assets/img/logo.png';
 import './header.scss';
 
-const drawerWidth = 240;
-
 const styles = theme => ({});
 
-export default class Header extends React.Component {
+class Header extends React.Component {
   constructor(props) {
     super(props);
-    // this.state={
-    //     anchor: 'left',
-    // }
+  }
+
+  logout = event => {
+    const { dispatch } = this.props;
+    dispatch(userActions.logout());
   }
 
   render() {
@@ -78,7 +69,7 @@ export default class Header extends React.Component {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="logout">
+                  <a className="nav-link" onClick={(event)=>{this.logout()}}>
                     <LogoutIcon /> Изход
                   </a>
                 </li>
@@ -95,3 +86,5 @@ export default class Header extends React.Component {
     );
   }
 }
+
+export default connect()(Header);

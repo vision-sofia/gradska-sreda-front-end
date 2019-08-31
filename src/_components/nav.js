@@ -115,9 +115,9 @@ Navigation.propTypes = {
   };
   
 const mapStateToProps = (state) =>{
-    const { loggingIn } = state.authentication;
+    const { loggedIn } = state.authentication;
     return {
-        loggingIn
+        loggedIn
     };
 }
 

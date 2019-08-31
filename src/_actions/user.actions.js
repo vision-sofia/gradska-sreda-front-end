@@ -6,7 +6,7 @@ export const userActions = {
     logout
 };
 
-function login(username, password){
+function login(username, password) {
     return dispatch => {
         let apiEndpoint = 'login_check';
         let payload = {
@@ -15,7 +15,6 @@ function login(username, password){
         }
         userService.post(apiEndpoint, payload)
         .then((response)=>{
-            console.log(response.data);
             if (response.data.token) {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('auth', response.data.auth);
@@ -26,25 +25,25 @@ function login(username, password){
     };
 }
 
-function logout(){
+function logout() {
     return dispatch => {
         localStorage.removeItem('auth');
         localStorage.removeItem('token');
         dispatch(logoutUser());
-        history.push('/');
+        // this.props.history.push('/');
     }
 }
 
-export function setUserDetails(user){
-    return{
+export function setUserDetails(user) {
+    return {
         type: "LOGIN_SUCCESS",
         auth: user.auth,
         token: user.token
     }
 }
 
-export function logoutUser(){
-    return{
+export function logoutUser() {
+    return {
         type: "LOGOUT_SUCCESS",
         auth: false,
         token: ''

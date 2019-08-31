@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import './App.scss';
-import { Router, Switch, Route} from 'react-router-dom';
+import { Router, Switch, Route, Redirect} from 'react-router-dom';
 import { Vendor } from './vendors/vendor.component';
 import { AddVendor } from './vendors/addvendor.component'
 import  { Login } from './login/';
 import { Home } from './home/';
 import { history } from './_helpers';
 import { PrivateRoute } from './_components';
-
+import LogoutPage from './views/logout/logout'
 
 class App extends Component {
   render() {
@@ -20,10 +20,12 @@ class App extends Component {
                 <PrivateRoute exact path='/vendor' component={Vendor} />
                 <PrivateRoute exact path='/add-vendor' component={AddVendor} />
                 <PrivateRoute exact path='/edit-vendor/:id' component={AddVendor} />
-                <Route exact path='/'>
-                  <Login/>
+                <Route exact path='/home'>
+                  <Login />
                   <Home />
                 </Route>
+                <Route path='/logout'component={LogoutPage} />
+                <Redirect from="/" to='/home'/>
               </Switch>
           </div>
         </Router>
