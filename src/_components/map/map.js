@@ -5,9 +5,15 @@ import $ from 'jquery';
 
 import { mapBoxAttribution, mapBoxUrl, apiEndpoints, defaultObjectStyle, defaultElConfig } from './map-config';
 import { debounce } from '../../_helpers';
-import { Collection } from './collections';
+import { Collection, Collections } from './collections';
 import './map.scss';
+import './Side-Panel/side-panel.scss';
+import './Survey/survey.scss';
+
 import config from '../../config/config';
+import { Survey } from './Survey/survey';
+import { Toggle } from './toggle';
+
 
 
 class Map extends React.Component {
@@ -27,6 +33,12 @@ class Map extends React.Component {
 
   componentDidMount() {
     this.init();
+
+    const pathVoteSurvey = new Survey(this);
+    this.setSurvey(pathVoteSurvey);
+
+    // const collctions = new Collections(this);
+    // this.setCollection(collctions);
   }
 
   init() {
@@ -382,7 +394,7 @@ class Map extends React.Component {
         this.openInfoPopup(layer, ev);
         break;
       case 'survey':
-        if (this.collections.isCollectionsActive && this.collections.isCollectionShown) {
+        if (this.collections && this.collections.isCollectionsActive && this.collections.isCollectionShown) {
           this.collections.add(layer, ev);
         } else {
           this.openSuerveyPopup(layer, ev);
@@ -607,7 +619,69 @@ class Map extends React.Component {
   }
 
   render() {
-    return <div id="mapMain"></div>;
+    return (
+      <>
+        <div id="mapMain"></div>
+        <div id="path-vote-suevey" data-toggle-type="side-panel" className="survey side-panel d-flex flex-column align-items-center justify-content-start">
+        <div className="container side-panel-btn-close-holder position-fixed d-flex flex-column align-items-center justify-content-center">
+            <button data-toggle-close data-toggle-for="path-vote-suevey" className="btn cursor-pointer side-panel-btn-close">
+                <i className="fas fa-ellipsis-h"></i>
+            </button>
+            <div className="side-panel-nav d-flex flex-md-column p-md-2 mt-md-3">
+                <a data-slide-to="0" className="active side-panel-nav-btn btn btn-primary rounded-circle" href="#carouselServeyPages" role="button" data-slide="next">
+                    <i className="fas fa-poll fa-rotate-90"></i>
+                </a>
+                <div className="ml-2 ml-md-0 mt-md-2" data-toggle="tooltip" data-placement="top" title="Трябва да попълните анкетата, за да видите статистиката.">
+                    <a data-slide-to="1" className="side-panel-nav-btn btn btn-primary rounded-circle" href="#carouselServeyPages" role="button" data-slide="next">
+                        <i className="fas fa-chart-pie"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="carouselServeyPages" data-interval="0" data-ride="false" className="d-flex justify-content-center w-100 row pl-lg-4 carousel slide carousel-vertical-stack h-100">
+            <div className="carousel-inner mt-5 mt-md-0 coll">
+                <div className="carousel-item p-4 h-100 active">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col">
+                                Попълнена анкета
+                                <div className="survey-progress d-flex mb-2">
+                                    <div className="progress flex-grow-1">
+                                        <div className="survey-progress-bar progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="row mb-5">
+                            <div className="col">
+                                <h3>Обект: <strong className="geo-object-name"></strong></h3>
+                                <h4>Тип: <strong className="geo-object-type"></strong></h4>
+                            </div>
+                        </div>
+
+                        <form className="survey-form"></form>
+                    </div>
+                </div>
+                <div className="carousel-item p-4 h-100">
+                    <div className="container">
+                        <div className="d-flex justify-content-between mb-2">
+                            <h3>Статистиката</h3>
+                        </div>
+
+                        <h4>Рейтинг</h4>
+
+                        <div className="survey-ratings-rating"></div>
+
+                        <h4 className="mt-4">Оценки от хората</h4>
+                        <div className="survey-ratings-respondents"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+      </>
+    );
   }
 }
 

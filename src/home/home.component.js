@@ -51,19 +51,17 @@ class Home extends Component {
      const { classes } = this.props;
 
       return (
-        <div className={classes.root}>
-            <div className={classes.appFrame}>
-              <Header />
-              <Map />
-              {/* <div className="mt-5 pt-5">
-                <Nav />
-              </div> */}
-              <main className={classes.content}>
-                  <div className={classes.toolbar} />
-                  <Typography>{'Home'}</Typography>
-              </main>
-            </div>
-        </div>
+        <>
+          <Header />
+          <Map />
+          {/* <div className="mt-5 pt-5">
+            <Nav />
+          </div> */}
+          <main className={classes.content}>
+              <div className={classes.toolbar} />
+              <Typography>{'Home'}</Typography>
+          </main>
+        </>
       );
    }
 }
