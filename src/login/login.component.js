@@ -11,7 +11,7 @@ import { history } from '../_helpers';
 import Typography from '@material-ui/core/Typography';
 import { withRouter } from 'react-router-dom';
 import './login.component.scss'
-
+import { Card } from '@material-ui/core';
 
 const styles = theme => ({
     root: {
@@ -19,8 +19,8 @@ const styles = theme => ({
       flexWrap: 'wrap',
     },
     container: {
-        display: 'flex',
-        flexWrap: 'wrap',
+        // display: 'flex',
+        // flexWrap: 'wrap',
     },
     margin: {
     //   margin: theme.spacing.unit,
@@ -31,13 +31,12 @@ const styles = theme => ({
     textField: {
         // marginLeft: theme.spacing.unit,
         // marginRight: theme.spacing.unit,
-        width: 200,
+        // width: 200,
     },
-
     paper: {
         // padding: theme.spacing.unit * 2,
-        textAlign: 'center',
-        color: theme.palette.text.secondary,
+        // textAlign: 'center',
+        // color: theme.palette.text.secondary,
     },
 
     button: {
@@ -45,7 +44,7 @@ const styles = theme => ({
     },
 
     input: {
-        display: 'none',
+        // display: 'none',
     },
   });
 
@@ -84,43 +83,42 @@ class Login extends Component {
    render() {
       const { classes } = this.props;
       return (
-        <div className="login-margin">
-            <Grid container >
-                <Grid item xs={3}>
-                </Grid>
-                <Grid item xs={6}>
-                    <Paper className={classes.paper}>
-                        <h1>{'Login'}</h1>
-                    </Paper>
-                    <Paper className={classes.paper}>
-                        <div>
-                        <TextField
-                            label="Username"
+        <div className="login-container">
+            <div className="login col-sm-9 col-md-7 col-lg-5 m-auto">
+                <h1 className="login-title">{'Вход'}</h1>
+                <div className="card">
+                    <form className="card-body">
+                        <div className="form-group">
+                            <label htmlFor="login_username">Потребителско име</label>
+                            <input id="login_username" 
+                            label="Потребителско име или email"
                             value={this.state.username}
-                            className={classes.textField}
-                            onChange = {this.handleChange('username')}
-                            />
-                        <br/>
-                        <br/>
-                        <TextField
-                            label="Password"
+                            className="form-control"
+                            onChange ={this.handleChange('username')}
+                            placeholder="email"/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="login_password">Парола</label>
+                            <input id="login_password" 
+                            label="Парола"
                             autoComplete="current-password"
                             type={this.state.showPassword ? 'text' : 'password'}
-                            className={classes.textField}
+                            className="form-control"
                             value={this.state.password}
                             onChange={this.handleChange('password')}
-                        />
-                        <br/>
-                        <br/>
-                        <Button variant="contained" color="primary" className={classes.button} onClick={(event)=>{this.login()}}>
-                            Login
-                        </Button>
+                            type="password" name="_password" 
+                            placeholder="***"/>
                         </div>
-                    </Paper>
-                </Grid>
-                <Grid item xs={3}>
-                </Grid>
-            </Grid>
+                        <div className="custom-control custom-checkbox mb-3 text-right">
+                            <input type="checkbox" name="_remember_me" className="custom-control-input" id="remember_me"/>
+                            <label className="custom-control-label" htmlFor="remember_me">Запомни ме</label>
+                        </div>
+                        <button className="btn btn-lg btn-primary btn-block" onClick={(event)=>{this.login()}}>
+                            Вход
+                        </button>
+                    </form>
+                </div>
+            </div>
         </div>
       );
    }
