@@ -1,19 +1,18 @@
 .login {
-    &-container {
-        background-color: red;
-        display: flex;
-        align-items: normal;
-        justify-content: center;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 100;
-    }
+  &-container {
+    display: flex;
+    align-items: normal;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+  }
 
-    &-title {
-        text-align: center;
-    }
+  &-title {
+    text-align: center;
+  }
 }

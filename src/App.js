@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
 import { Router, Switch, Route, Redirect} from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Vendor } from './vendors/vendor.component';
 import { AddVendor } from './vendors/addvendor.component'
 import  { Login } from './login/';
@@ -10,6 +11,10 @@ import { PrivateRoute } from './_components';
 import LogoutPage from './views/logout/logout'
 
 class App extends Component {
+  constructor() {
+    super();
+  }
+  
   render() {
     return (
       <div className="App">
@@ -22,9 +27,11 @@ class App extends Component {
                 <PrivateRoute exact path='/edit-vendor/:id' component={AddVendor} />
                 <Route exact path='/home'>
                   <Login />
-                  <Home />
+                  <main className={'App-container ' + (this.props.loggedIn ? null : 'blur')}>
+                    <Home />
+                  </main>
                 </Route>
-                <Route path='/logout'component={LogoutPage} />
+                <Route path='/logout' component={LogoutPage} />
                 <Redirect from="/" to='/home'/>
               </Switch>
           </div>
@@ -34,4 +41,14 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  console.log(state);
+  
+  const { loggedIn } = state.authentication;
+
+  return {
+     loggedIn
+  };
+}
+
+export default connect(mapStateToProps)(App);

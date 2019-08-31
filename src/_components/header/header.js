@@ -69,12 +69,12 @@ class Header extends React.Component {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" onClick={(event)=>{this.logout()}}>
+                  <a className="nav-link" href="/logout" onClick={(event)=>{event.preventDefault(); this.logout()}}>
                     <LogoutIcon /> Изход
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link  " href="login">
+                  <a className="nav-link " href="/login">
                     <VpnKeyIcon /> Вход
                   </a>
                 </li>
