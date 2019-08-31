@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux';  
+import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '../_components/appbar';
-import Nav from '../_components/nav'; 
-import Header from '../_components/header/header'; 
+import Nav from '../_components/nav';
+import Map from '../_components/map/map';
+import Header from '../_components/header/header';
 
 
 const drawerWidth = 240;
@@ -53,6 +54,7 @@ class Home extends Component {
         <div className={classes.root}>
             <div className={classes.appFrame}>
               <Header />
+              <Map />
               {/* <div className="mt-5 pt-5">
                 <Nav />
               </div> */}
@@ -65,12 +67,12 @@ class Home extends Component {
       );
    }
 }
-  
+
 Home.propTypes = {
       classes: PropTypes.object.isRequired,
 };
-    
-  
+
+
 function mapStateToProps(state) {
     return state;
 }
@@ -81,4 +83,3 @@ const connectedHomePage = withRouter(connect(mapStateToProps, null, null, {
 })(withStyles(styles)(Home)));
 
 export { connectedHomePage as Home };
-  
