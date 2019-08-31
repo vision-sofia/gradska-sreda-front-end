@@ -7,6 +7,8 @@ import { mapBoxAttribution, mapBoxUrl, apiEndpoints, defaultObjectStyle, default
 import { debounce } from '../../_helpers';
 import { Collection } from './collections';
 import './map.scss';
+import config from '../../config/config';
+
 
 class Map extends React.Component {
   map;
@@ -247,7 +249,7 @@ class Map extends React.Component {
 
     $.ajax({
       data: returnedTarget,
-      url: '/front-end/map?',
+      url: config.baseUrl + 'map?',
       success: (results) => {
         this.isMapLoaded = true;
         this.mapResponse.settings = results.settings;
@@ -289,7 +291,7 @@ class Map extends React.Component {
 
     $.ajax({
       data: a,
-      url: "/map/z",
+      url: config.baseUrl + 'map/z',
       success: (results) => {
 
       }
@@ -343,7 +345,7 @@ class Map extends React.Component {
     let lng;
 
     $.ajax({
-      url: "/map/p",
+      url: config.baseUrl + 'map/p',
       success: (results) => {
         zoom = results.zoom;
         lat = results.lat;

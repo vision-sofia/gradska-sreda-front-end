@@ -1,7 +1,9 @@
 import L from 'leaflet';
 import $ from 'jquery';
+import config from '../../config/config';
 
 import { defaultMapSize, defaultObjectStyle } from './map-config';
+import { createConfigItem } from '@babel/core';
 
 export class Collection {
 
@@ -144,7 +146,7 @@ export class Collections {
 
             $.ajax({
                 type: 'POST',
-                url: '/front-end/geo-collection/add',
+                url: config.baseUrl + 'geo-collection/add',
                 data: {
                     'geo-object': layer.feature.properties.id,
                     'collection': this.activeCollectionId
@@ -162,7 +164,7 @@ export class Collections {
 
         $.ajax({
             type: 'DELETE',
-            url: `/front-end/geo-collection/${layerUUID}`,
+            url: config.baseUrl + `geo-collection/${layerUUID}`,
             success: () => {
                 this.getGeoCollectionsList();
                 this.mapInstance.mapResponse.CollectionsLayerControl.removeLayer(layer);
@@ -173,7 +175,7 @@ export class Collections {
     new() {
         $.ajax({
             type: 'POST',
-            url: '/front-end/geo-collection/new',
+            url: config.baseUrl + 'geo-collection/new',
             success: (response) => {
                 this.activeCollectionId = response.id;
                 this.getGeoCollectionsList();
@@ -202,7 +204,7 @@ export class Collections {
 
     getGeoCollectionsList() {
         $.ajax({
-            url: '/front-end/geo-collection/info',
+            url: config.baseUrl + 'geo-collection/info',
             success: result => {
                 this.collectionsResponse = result;
                 let html = `<ul class="collections-list mt-4 pl-4">`;

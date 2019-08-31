@@ -10,7 +10,7 @@ export const userService = {
 };
 
 function get(apiEndpoint){
-    return axios.get(config.baseUrl+apiEndpoint, getOptions()).then((response)=>{
+    return axios.get(config.baseUrl + apiEndpoint, getOptions()).then((response)=>{
         return response;
     }).catch((err)=>{
         console.log("Error in response");
@@ -19,7 +19,7 @@ function get(apiEndpoint){
 }
 
 function post(apiEndpoint, payload){
-    return axios.post(config.baseUrl+apiEndpoint, payload, getOptions()).then((response)=>{
+    return axios.post(config.baseUrl + apiEndpoint, payload, getOptions()).then((response)=>{
         return response;
     }).catch((err)=>{
         console.log(err);
@@ -27,7 +27,7 @@ function post(apiEndpoint, payload){
 }
 
 function put(apiEndpoint, payload){
-    return axios.put(config.baseUrl+apiEndpoint, payload, getOptions()).then((response)=>{
+    return axios.put(config.baseUrl + apiEndpoint, payload, getOptions()).then((response)=>{
         return response;
     }).catch((err)=>{
         console.log(err);
@@ -35,7 +35,7 @@ function put(apiEndpoint, payload){
 }
 
 function deleteDetail(apiEndpoint){
-    return axios.delete(config.baseUrl+apiEndpoint, getOptions()).then((response)=>{
+    return axios.delete(config.baseUrl + apiEndpoint, getOptions()).then((response)=>{
         return response;
     }).catch((err)=>{
         console.log(err);
@@ -43,7 +43,7 @@ function deleteDetail(apiEndpoint){
 }
 
 function getOptions(){
-    let options = {}; 
+    let options = {};
     if(localStorage.getItem('token')){
         options.headers = { 'Authorization': 'Bearer ' + localStorage.getItem('token') };
     }
