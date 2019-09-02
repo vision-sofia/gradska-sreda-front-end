@@ -3,6 +3,7 @@ import $ from 'jquery';
 
 import { defaultMapSize } from '../map-config';
 import config from '../../../config/config';
+import axios from 'axios';
 
 export class Survey {
     mapInstance;
@@ -111,37 +112,28 @@ export class Survey {
     }
 
     getQuestions() {
-        $.ajax({
-            url: config.baseUrl + 'geo/' + this.geoObjectUUID,
-            success: (result) => {
-               this.buildSurvey(result);
-            }
+        axios.get(config.baseUrl + 'geo/' + this.geoObjectUUID,
+        ).then((result) => {
+          this.buildSurvey(result.data);
         });
     }
 
     getResults() {
-        $.ajax({
-            url: config.baseUrl + 'geo/' + this.geoObjectUUID + '/result',
-            success: (result) => {
-               this.buildResults(result);
-            }
+        axios.get(config.baseUrl + 'geo/' + this.geoObjectUUID + '/result',
+        ).then((result) => {
+          this.buildResults(result.data);
         });
     }
 
     submitSurvey(data, value) {
-        $.ajax({
-            type: 'POST',
-            url: config.baseUrl + 'geo/' + this.geoObjectUUID + '/q',
-            data: data,
-            beforeSend: () => {
-                if (document.getElementById(value)) {
-                    document.getElementById(value).classList.add('active');
-                }
-            },
-            success: (result) => {
-                this.buildSurvey(result);
-                this.getResults();
-            }
+      if (document.getElementById(value)) {
+        document.getElementById(value).classList.add('active');
+      }
+        axios.post(
+          config.baseUrl + 'geo/' + this.geoObjectUUID + '/q', data
+        ).then((result) => {
+          this.buildSurvey(result.data);
+          this.getResults();
         });
     };
 
@@ -191,6 +183,8 @@ export class Survey {
     }
 
     buildSurvey(result) {
+        console.log(result);
+
         let html = ``;
         let isSelectedParent = false;
         this.progress = result.survey.progress;
@@ -266,10 +260,10 @@ export class Survey {
 
         if (this.progress.percentage === 100) {
             this.elSurveyPollBtn.classList.remove('disabled');
-            $(this.elSurveyPollBtn).parent().tooltip('disable');
+            // $(this.elSurveyPollBtn).parent().tooltip('disable');
         } else {
             this.elSurveyPollBtn.classList.add('disabled');
-            $(this.elSurveyPollBtn).parent().tooltip('enable');
+            // $(this.elSurveyPollBtn).parent().tooltip('enable');
         }
     }
 
@@ -319,13 +313,11 @@ export class Survey {
     }
 
     clearQuestion(uuid) {
-        $.ajax({
-            type: 'POST',
-            url: config.baseUrl + 'geo/' + this.geoObjectUUID + '/clear/' + uuid,
-            success: () => {
-                this.getQuestions();
-                this.getResults();
-            }
+        axios.post(
+          config.baseUrl + 'geo/' + this.geoObjectUUID + '/clear/' + uuid,
+        ).then((result) => {
+          this.getQuestions();
+          this.getResults();
         });
     }
 };

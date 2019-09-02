@@ -14,25 +14,24 @@ class App extends Component {
   constructor() {
     super();
   }
-  
+
   render() {
     return (
       <div className="App">
         <Router history={history}>
-          <div>            
+          <div>
               <Switch>
-                {/* <PrivateRoute exact path='/home' component={Home} /> */}
                 <PrivateRoute exact path='/vendor' component={Vendor} />
                 <PrivateRoute exact path='/add-vendor' component={AddVendor} />
                 <PrivateRoute exact path='/edit-vendor/:id' component={AddVendor} />
-                <Route exact path='/home'>
+                <Route exact path='/map'>
                   <Login />
                   <main className={'App-container ' + (this.props.loggedIn ? null : 'blur')}>
                     <Home />
                   </main>
                 </Route>
                 <Route path='/logout' component={LogoutPage} />
-                <Redirect from="/" to='/home'/>
+                <Redirect from="/" to='/map'/>
               </Switch>
           </div>
         </Router>
@@ -43,7 +42,7 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   console.log(state);
-  
+
   const { loggedIn } = state.authentication;
 
   return {

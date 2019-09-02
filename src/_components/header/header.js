@@ -45,7 +45,7 @@ class Header extends React.Component {
             <div className="navbar-collapse collapse" id="collapsingNavbar">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <a className="nav-link" href="map">
+                  <a className="nav-link" href="/map">
                     <HomeIcon /> Карта
                   </a>
                 </li>
@@ -62,7 +62,7 @@ class Header extends React.Component {
                     За платформата
                   </a>
                 </li>
-               
+
                 <li className="nav-item">
                   <a className="nav-link" href="#">
                     <i className="fa fa-cog"></i>

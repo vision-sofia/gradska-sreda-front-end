@@ -19,7 +19,7 @@ function login(username, password) {
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('auth', response.data.auth);
                 dispatch(setUserDetails(response.data));
-                history.push('/home');
+                history.push('/');
             }
         })
     };
