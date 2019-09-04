@@ -21,7 +21,7 @@ export class Survey {
     };
 
     mapMarkerIcon = L.icon({
-        iconUrl: config.baseUrl + 'front/svg/icon--map-pin--edit.svg',
+        iconUrl: '/front/svg/icon--map-pin--edit.svg',
         iconSize:     [53.707, 53.707], // size of the icon
         iconAnchor:   [26.9, 53], // point of the icon which will correspond to marker's location
     });
@@ -130,7 +130,7 @@ export class Survey {
         document.getElementById(value).classList.add('active');
       }
         axios.post(
-          config.baseUrl + config.apiUrls.geo.url + '/' + this.geoObjectUUID + config.apiUrls.q.url, data
+          config.baseUrl + config.apiUrls.geo.url + '/' + this.geoObjectUUID + config.apiUrls.geo.q.url, data
         ).then((result) => {
           this.buildSurvey(result.data);
           this.getResults();

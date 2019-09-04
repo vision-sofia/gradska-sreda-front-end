@@ -181,14 +181,10 @@ class Map extends React.Component {
       return;
     }
 
-
     this.map = new L.map('mapMain', {
       updateWhenZooming: false,
       attributionControl: false
     });
-
-    console.log(this.map);
-
 
     this.map.setActiveArea('map-active-area');
     this.map.setActiveArea(defaultObjectStyle.mapActiveArea);

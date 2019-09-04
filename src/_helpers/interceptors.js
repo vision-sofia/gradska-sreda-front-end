@@ -45,7 +45,7 @@ axios.interceptors.response.use(response => response, error => {
   const status = error.response ? error.response.status : null
 
   if (status === 401) {
-    history.push(config.appUrls.logout);
+    history.push(config.appUrls.logout.url);
   }
 
   return Promise.reject(error);
