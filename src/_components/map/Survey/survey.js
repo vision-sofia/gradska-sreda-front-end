@@ -112,14 +112,14 @@ export class Survey {
     }
 
     getQuestions() {
-        axios.get(config.baseUrl + 'geo/' + this.geoObjectUUID,
+        axios.get(config.baseUrl + config.apiUrls.geo.url + '/' + this.geoObjectUUID,
         ).then((result) => {
           this.buildSurvey(result.data);
         });
     }
 
     getResults() {
-        axios.get(config.baseUrl + 'geo/' + this.geoObjectUUID + '/result',
+        axios.get(config.baseUrl + config.apiUrls.geo.url + '/' + this.geoObjectUUID + config.apiUrls.geo.result.url,
         ).then((result) => {
           this.buildResults(result.data);
         });
@@ -130,7 +130,7 @@ export class Survey {
         document.getElementById(value).classList.add('active');
       }
         axios.post(
-          config.baseUrl + 'geo/' + this.geoObjectUUID + '/q', data
+          config.baseUrl + config.apiUrls.geo.url + '/' + this.geoObjectUUID + config.apiUrls.q.url, data
         ).then((result) => {
           this.buildSurvey(result.data);
           this.getResults();
@@ -314,7 +314,7 @@ export class Survey {
 
     clearQuestion(uuid) {
         axios.post(
-          config.baseUrl + 'geo/' + this.geoObjectUUID + '/clear/' + uuid,
+          config.baseUrl + config.apiUrls.geo.url + '/' + this.geoObjectUUID + config.apiUrls.geo.clear.url + '/' + uuid,
         ).then((result) => {
           this.getQuestions();
           this.getResults();

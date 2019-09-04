@@ -146,7 +146,7 @@ export class Collections {
 
             $.ajax({
                 type: 'POST',
-                url: config.baseUrl + 'geo-collection/add',
+                url: config.baseUrl + config.apiUrls.geoCollection.url + config.apiUrls.geoCollection.add.url,
                 data: {
                     'geo-object': layer.feature.properties.id,
                     'collection': this.activeCollectionId
@@ -164,7 +164,7 @@ export class Collections {
 
         $.ajax({
             type: 'DELETE',
-            url: config.baseUrl + `geo-collection/${layerUUID}`,
+            url: config.baseUrl + config.apiUrls.geoCollection.url + `/${layerUUID}`,
             success: () => {
                 this.getGeoCollectionsList();
                 this.mapInstance.mapResponse.CollectionsLayerControl.removeLayer(layer);
@@ -175,7 +175,7 @@ export class Collections {
     new() {
         $.ajax({
             type: 'POST',
-            url: config.baseUrl + 'geo-collection/new',
+            url: config.baseUrl + config.apiUrls.geoCollection.url + config.apiUrls.geoCollection.new.url,
             success: (response) => {
                 this.activeCollectionId = response.id;
                 this.getGeoCollectionsList();
@@ -204,7 +204,7 @@ export class Collections {
 
     getGeoCollectionsList() {
         $.ajax({
-            url: config.baseUrl + 'geo-collection/info',
+            url: config.baseUrl + config.apiUrls.geoCollection.url + config.apiUrls.geoCollection.info.url,
             success: result => {
                 this.collectionsResponse = result;
                 let html = `<ul class="collections-list mt-4 pl-4">`;
