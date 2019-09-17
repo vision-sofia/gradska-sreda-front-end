@@ -28,7 +28,8 @@
     left: 0;
 
     &.blur {
-      filter: blur(2px)
+      filter: blur(2px);
+      overflow: hidden;
     }
   }
 

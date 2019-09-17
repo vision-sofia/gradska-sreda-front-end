@@ -1,6 +1,8 @@
 import './App.scss';
 import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
+import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
+
 import React, { Component } from 'react';
 import { Router, Switch, Route, Redirect} from 'react-router-dom';
 import { connect } from 'react-redux';

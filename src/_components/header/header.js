@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 import { userActions } from '../../_actions';
 import { connect } from 'react-redux';
 import HomeIcon from '@material-ui/icons/Home';
@@ -20,9 +21,6 @@ class Header extends React.Component {
   }
 
   render() {
-    // const { classes } = this.props;
-    // const { anchor } = this.state;
-
     return (
       <header id="app-header" className="app-header active fixed-top">
         <nav className="navbar navbar-expand-lg navbar-light bg-white">
@@ -45,9 +43,9 @@ class Header extends React.Component {
             <div className="navbar-collapse collapse" id="collapsingNavbar">
               <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <a className="nav-link" href="/map">
+                  <Link className="nav-link" to="/map">
                     <HomeIcon /> Карта
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
                   <a className="nav-link" href="info">
@@ -62,22 +60,20 @@ class Header extends React.Component {
                     За платформата
                   </a>
                 </li>
-
-                <li className="nav-item">
-                  <a className="nav-link" href="#">
-                    <i className="fa fa-cog"></i>
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="/logout" onClick={(event)=>{event.preventDefault(); this.logout()}}>
-                    <LogoutIcon /> Изход
-                  </a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link " href="/login">
-                    <VpnKeyIcon /> Вход
-                  </a>
-                </li>
+                {(this.props.loggedIn) && (
+                  <li className="nav-item">
+                    <a className="nav-link" href="/logout" onClick={(event)=>{event.preventDefault(); this.logout()}}>
+                      <LogoutIcon /> Изход
+                    </a>
+                  </li>
+                )}
+                {(!this.props.loggedIn) && (
+                  <li className="nav-item">
+                    <a className="nav-link " href="/login">
+                      <VpnKeyIcon /> Вход
+                    </a>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
@@ -87,4 +83,12 @@ class Header extends React.Component {
   }
 }
 
-export default connect()(Header);
+const mapStateToProps = (state) => {
+  const { loggedIn } = state.authentication;
+
+  return {
+     loggedIn
+  };
+}
+
+export default connect(mapStateToProps)(Header);
