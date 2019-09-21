@@ -4,15 +4,25 @@ import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 import '../node_modules/bootstrap/dist/js/bootstrap.min.js';
 
 import React, { Component } from 'react';
-import { Router, Switch, Route, Redirect} from 'react-router-dom';
+import { Router, Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Vendor } from './vendors/vendor.component';
-import { AddVendor } from './vendors/addvendor.component'
-import  { Login } from './login/';
+import { AddVendor } from './vendors/addvendor.component';
+import { Login } from './login/';
+import { Register } from './register/';
 import { Home } from './home/';
 import { history } from './_helpers';
 import { PrivateRoute } from './_components';
-import LogoutPage from './views/logout/logout'
+import config from './config/config';
+
+const HashRoute = ({ component: Component, hash, ...routeProps }) => (
+  <Route
+    {...routeProps}
+    component={({ location, ...props }) =>
+      location.hash === hash && <Component {...props} />
+    }
+  />
+);
 
 class App extends Component {
   constructor() {
@@ -20,23 +30,40 @@ class App extends Component {
   }
 
   render() {
+    setTimeout(() => {
+      if (!this.props.loggedIn) {
+        window.location.hash = config.appUrls.login.hash;
+      }
+    });
+
     return (
-      <div className="App">
+      <div className='App'>
         <Router history={history}>
           <div>
-              <Switch>
-                <PrivateRoute exact path='/vendor' component={Vendor} />
-                <PrivateRoute exact path='/add-vendor' component={AddVendor} />
-                <PrivateRoute exact path='/edit-vendor/:id' component={AddVendor} />
-                <Route exact path='/map'>
-                  <Login />
-                  <main className={'App-container ' + (this.props.loggedIn ? null : 'blur')}>
-                    <Home />
-                  </main>
-                </Route>
-                <Route path='/logout' component={LogoutPage} />
-                <Redirect from="/" to='/map'/>
-              </Switch>
+            <HashRoute
+              hash='#login'
+              component={Login}
+            />
+            <HashRoute hash='#register' component={Register} />
+            <Switch>
+              <PrivateRoute exact path='/vendor' component={Vendor} />
+              <PrivateRoute exact path='/add-vendor' component={AddVendor} />
+              <PrivateRoute
+                exact
+                path='/edit-vendor/:id'
+                component={AddVendor}
+              />
+              <Route exact path='/map'>
+                <main
+                  className={
+                    'App-container ' + (this.props.loggedIn ? null : 'blur')
+                  }
+                >
+                  <Home />
+                </main>
+              </Route>
+              <Redirect from='/' to='/map' />
+            </Switch>
           </div>
         </Router>
       </div>
@@ -44,14 +71,12 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  console.log(state);
-
+const mapStateToProps = state => {
   const { loggedIn } = state.authentication;
 
   return {
-     loggedIn
+    loggedIn
   };
-}
+};
 
 export default connect(mapStateToProps)(App);

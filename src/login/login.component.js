@@ -4,130 +4,157 @@ import { withStyles } from '@material-ui/core/styles';
 import { connect } from 'react-redux';
 import { userActions } from '../_actions';
 import { history } from '../_helpers';
-import { withRouter } from 'react-router-dom';
-import './login.component.scss'
+import { withRouter, Link } from 'react-router-dom';
+import './login.component.scss';
 
 const styles = theme => ({
-    root: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    container: {
-        // display: 'flex',
-        // flexWrap: 'wrap',
-    },
-    margin: {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap'
+  },
+  container: {
+    // display: 'flex',
+    // flexWrap: 'wrap',
+  },
+  margin: {
     //   margin: theme.spacing.unit,
-    },
-    withoutLabel: {
+  },
+  withoutLabel: {
     //   marginTop: theme.spacing.unit * 3,
-    },
-    textField: {
-        // marginLeft: theme.spacing.unit,
-        // marginRight: theme.spacing.unit,
-        // width: 200,
-    },
-    paper: {
-        // padding: theme.spacing.unit * 2,
-        // textAlign: 'center',
-        // color: theme.palette.text.secondary,
-    },
+  },
+  textField: {
+    // marginLeft: theme.spacing.unit,
+    // marginRight: theme.spacing.unit,
+    // width: 200,
+  },
+  paper: {
+    // padding: theme.spacing.unit * 2,
+    // textAlign: 'center',
+    // color: theme.palette.text.secondary,
+  },
 
-    button: {
-        // margin: theme.spacing.unit,
-    },
+  button: {
+    // margin: theme.spacing.unit,
+  },
 
-    input: {
-        // display: 'none',
-    },
-  });
+  input: {
+    // display: 'none',
+  }
+});
 
-  
 class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            username: '',
-            password: '',
-            showPassword: false,
-            loggedIn: false
-        }
-    }
-
-    componentDidMount() {
-    }
-
-    handleChange = prop => event => {
-        this.setState({ [prop]: event.target.value });
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+      showPassword: false,
+      loggedIn: false
     };
+  }
 
-    login = event => {
-        this.setState({ submitted: true });
-        const { username, password } = this.state;
-        const { dispatch } = this.props;
-        if (username && password) {
-            dispatch(userActions.login(username, password));
-        }
+  componentDidMount() {}
+
+  handleChange = prop => event => {
+    this.setState({ [prop]: event.target.value });
+  };
+
+  login = event => {
+    this.setState({ submitted: true });
+    const { username, password } = this.state;
+    const { dispatch } = this.props;
+    if (username && password) {
+      dispatch(userActions.login(username, password));
     }
+  };
 
-   render() {
-      const { classes } = this.props;
-      return (
-        !this.props.loggedIn ? (
-            <div className="login-container">
-                <div className="login col-sm-9 col-md-7 col-lg-5 m-auto">
-                    <h1 className="login-title">{'Вход'}</h1>
-                    <div className="card">
-                        <form className="card-body">
-                            <div className="form-group">
-                                <label htmlFor="login_username">Потребителско име</label>
-                                <input id="login_username" 
-                                label="Потребителско име или email"
-                                value={this.state.username}
-                                className="form-control"
-                                onChange ={this.handleChange('username')}
-                                placeholder="email"/>
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="login_password">Парола</label>
-                                <input id="login_password" 
-                                label="Парола"
-                                autoComplete="current-password"
-                                type={this.state.showPassword ? 'text' : 'password'}
-                                className="form-control"
-                                value={this.state.password}
-                                onChange={this.handleChange('password')}
-                                type="password" name="_password" 
-                                placeholder="***"/>
-                            </div>
-                            <div className="custom-control custom-checkbox mb-3 text-right">
-                                <input type="checkbox" name="_remember_me" className="custom-control-input" id="remember_me"/>
-                                <label className="custom-control-label" htmlFor="remember_me">Запомни ме</label>
-                            </div>
-                            <button className="btn btn-lg btn-primary btn-block" onClick={(e)=>{e.preventDefault(); this.login();}}>
-                                Вход
-                            </button>
-                        </form>
-                    </div>
+  render() {
+    return !this.props.loggedIn ? (
+      <div className='login-container'>
+        <div className='login col-sm-9 col-md-7 col-lg-5 m-auto'>
+          <h1 className='login-title'>Вход</h1>
+          <div className='card'>
+            <form className='card-body'>
+              <div className='form-group'>
+                <label htmlFor='login_username'>Потребителско име</label>
+                <input
+                  id='login_username'
+                  label='Потребителско име или email'
+                  value={this.state.username}
+                  className='form-control'
+                  onChange={this.handleChange('username')}
+                  placeholder='email'
+                />
+              </div>
+              <div className='form-group'>
+                <label htmlFor='login_password'>Парола</label>
+                <input
+                  id='login_password'
+                  label='Парола'
+                  autoComplete='current-password'
+                  type={this.state.showPassword ? 'text' : 'password'}
+                  className='form-control'
+                  value={this.state.password}
+                  onChange={this.handleChange('password')}
+                  type='password'
+                  name='_password'
+                  placeholder='***'
+                />
+              </div>
+              <div>
+                <div>
+                  <Link className='nav-link' to='#register'>
+                    Нова регистрация
+                  </Link>
                 </div>
-            </div>) : null
-       );
-    }
+                <div className='custom-control custom-checkbox mb-3 text-right'>
+                  <input
+                    type='checkbox'
+                    name='_remember_me'
+                    className='custom-control-input'
+                    id='remember_me'
+                  />
+                  <label className='custom-control-label' htmlFor='remember_me'>
+                    Запомни ме
+                  </label>
+                </div>
+              </div>
+              <button
+                className='btn btn-lg btn-primary btn-block'
+                onClick={e => {
+                  e.preventDefault();
+                  this.login();
+                }}
+              >
+                Вход
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    ) : null;
+  }
 }
 
 Login.propTypes = {
-    classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 };
-  
-const mapStateToProps = (state) => {
-    const { loggedIn } = state.authentication;
-  
-    return {
-       loggedIn
-    };
-}
 
-const connectedLoginPage = withRouter(connect(mapStateToProps, null, null, {
-})(withStyles(styles)(Login)));
+const mapStateToProps = state => {
+  const { loggedIn } = state.authentication;
+
+  return {
+    loggedIn
+  };
+};
+
+const connectedLoginPage = withRouter(
+  connect(
+    mapStateToProps,
+    null,
+    null,
+    {}
+  )(withStyles(styles)(Login))
+);
 
 export { connectedLoginPage as Login };

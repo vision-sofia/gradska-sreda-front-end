@@ -5,6 +5,16 @@ module.exports = {
       title: 'Logout',
       url: '/logout',
     },
+    login: {
+      title: 'Login',
+      url: '/login',
+      hash: 'login',
+    },
+    register: {
+      title: 'Register',
+      url: '/register',
+      hash: 'register',
+    }
   },
   apiUrls: {
     geo: {

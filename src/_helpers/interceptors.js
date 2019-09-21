@@ -1,6 +1,14 @@
 import axios from 'axios';
 import { history } from '../_helpers';
 import config from '../config/config';
+import { userActions } from '../_actions';
+import { createStore, applyMiddleware } from 'redux';
+import reducer from '../_reducers';
+import thunk from 'redux-thunk';
+
+const store = createStore(reducer, applyMiddleware(thunk))
+
+const { dispatch } = store;
 
 const axiosInstance = axios.create({
   baseURL: config.baseURL
@@ -45,7 +53,7 @@ axios.interceptors.response.use(response => response, error => {
   const status = error.response ? error.response.status : null
 
   if (status === 401) {
-    history.push(config.appUrls.logout.url);
+    dispatch(userActions.logout());
   }
 
   return Promise.reject(error);

@@ -48,17 +48,14 @@ class Header extends React.Component {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="info">
+                  <Link className="nav-link" to="/map">
                     Информация
-                  </a>
+                  </Link>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className="nav-link"
-                    href="about"
-                  >
+                  <Link className="nav-link" to="/map">
                     За платформата
-                  </a>
+                  </Link>
                 </li>
                 {(this.props.loggedIn) && (
                   <li className="nav-item">
@@ -69,7 +66,7 @@ class Header extends React.Component {
                 )}
                 {(!this.props.loggedIn) && (
                   <li className="nav-item">
-                    <a className="nav-link " href="/login">
+                    <a className="nav-link " href="/map#login">
                       <VpnKeyIcon /> Вход
                     </a>
                   </li>

@@ -1,51 +1,54 @@
 import { userService } from '../_services/';
 import { history } from '../_helpers';
+import config from '../config/config';
 
 export const userActions = {
-    login,
-    logout
+  login,
+  logout
 };
 
 function login(username, password) {
-    return dispatch => {
-        let apiEndpoint = 'login_check';
-        let payload = {
-            username: username,
-            password: password
-        }
-        userService.post(apiEndpoint, payload)
-        .then((response)=>{
-            if (response.data.token) {
-                localStorage.setItem('token', response.data.token);
-                localStorage.setItem('auth', response.data.auth);
-                dispatch(setUserDetails(response.data));
-                history.push('/');
-            }
-        })
+  return dispatch => {
+    let apiEndpoint = 'login_check';
+    let payload = {
+      username: username,
+      password: password
     };
+    userService.post(apiEndpoint, payload).then(response => {
+      if (response.data.token) {
+        localStorage.setItem('token', response.data.token);
+        localStorage.setItem('auth', response.data.auth);
+        dispatch(setUserDetails(response.data));
+        history.push('/');
+      }
+    });
+  };
 }
 
 function logout() {
-    return dispatch => {
-        localStorage.removeItem('auth');
-        localStorage.removeItem('token');
-        dispatch(logoutUser());
-        // this.props.history.push('/');
-    }
+  return dispatch => {
+    localStorage.removeItem('auth');
+    localStorage.removeItem('token');
+    dispatch(logoutUser());
+
+    setTimeout(() => {
+      window.location.hash = config.appUrls.login.hash;
+    }, 4000);
+  };
 }
 
 export function setUserDetails(user) {
-    return {
-        type: "LOGIN_SUCCESS",
-        auth: user.auth,
-        token: user.token
-    }
+  return {
+    type: 'LOGIN_SUCCESS',
+    auth: user.auth,
+    token: user.token
+  };
 }
 
 export function logoutUser() {
-    return {
-        type: "LOGOUT_SUCCESS",
-        auth: false,
-        token: ''
-    }
+  return {
+    type: 'LOGOUT_SUCCESS',
+    auth: false,
+    token: ''
+  };
 }
