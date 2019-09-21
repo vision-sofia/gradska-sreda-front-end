@@ -43,7 +43,7 @@ class Register extends Component {
           <h1 className="register-title">Регистрация</h1>
           <div className="card">
             <div className="card-body">
-              <form name="user_register" method="post" novalidate="novalidate">
+              <form name="user_register" method="post" noValidate="novalidate">
                 <div className="form-group">
                   <label htmlFor="login_username">Потребителско име</label>
                   <input
@@ -95,15 +95,17 @@ class Register extends Component {
                     </label>
                   </div>
                 </div>
-                <Link className="nav-link" to="#login">
-                  Вече си регистриран?
-                </Link>
+
                 <button
                   type="submit"
                   className="btn btn-lg btn-primary btn-block"
                 >
                   Регистрирай ме
                 </button>
+
+                <Link className="d-flex justify-content-center mt-3" to="#login">
+                  Вече си регистриран?
+                </Link>
               </form>
             </div>
           </div>

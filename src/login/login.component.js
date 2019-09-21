@@ -101,13 +101,11 @@ class Login extends Component {
                   placeholder='***'
                 />
               </div>
-              <div>
-                <div>
-                  <Link className='nav-link' to='#register'>
-                    Нова регистрация
-                  </Link>
-                </div>
-                <div className='custom-control custom-checkbox mb-3 text-right'>
+              <div className='mb-3 d-flex justify-content-between align-items-center'>
+                <Link className='nav-link' to='#register'>
+                  Нова регистрация
+                </Link>
+                <div className='custom-control custom-checkbox text-right'>
                   <input
                     type='checkbox'
                     name='_remember_me'

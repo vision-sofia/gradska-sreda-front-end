@@ -59,7 +59,7 @@ class Header extends React.Component {
                 </li>
                 {(this.props.loggedIn) && (
                   <li className="nav-item">
-                    <a className="nav-link" href="/logout" onClick={(event)=>{event.preventDefault(); this.logout()}}>
+                    <a data-toggle="collapse" data-target="#collapsingNavbar" className="nav-link" href="/logout" onClick={(event)=>{event.preventDefault(); this.logout()}}>
                       <LogoutIcon /> Изход
                     </a>
                   </li>
