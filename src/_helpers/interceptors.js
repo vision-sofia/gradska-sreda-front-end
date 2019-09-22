@@ -3,10 +3,7 @@ import { history } from '../_helpers';
 import config from '../config/config';
 import { userActions } from '../_actions';
 import { createStore, applyMiddleware } from 'redux';
-import reducer from '../_reducers';
-import thunk from 'redux-thunk';
-
-const store = createStore(reducer, applyMiddleware(thunk))
+import store from '../store/store.js';
 
 const { dispatch } = store;
 

@@ -33,7 +33,7 @@ function logout() {
 
     setTimeout(() => {
       window.location.hash = config.appUrls.login.hash;
-    }, 4000);
+    }, 200);
   };
 }
 
